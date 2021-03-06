@@ -9,13 +9,21 @@ name: 编译最新n270
 
 on:
   repository_dispatch:
-    types: [lean, x86_64]
+    types: [lean, n270]
   workflow_dispatch:
   schedule:
     - cron: 0 18 * * *
   watch:
     types: started
 
+env:
+  UPLOAD_BIN_DIR: false
+  UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: true
+  UPLOAD_WETRANSFER: true
+  UPLOAD_RELEASE: false
+  TZ: Asia/Shanghai
+  
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -40,25 +48,24 @@ jobs:
 
       - name: Update feeds
         run: |
-          git clone https://github.com/coolsnowwolf/lede lede
-          cd lede
+          git clone https://github.com/coolsnowwolf/lede openwrt
+          cd openwrt
           sudo sed -i -e '$asrc-git helloworld https://github.com/fw876/helloworld' ./feeds.conf.default
-          #sudo sed -i 's/192.168.1.1/192.168.3.1/g' package/base-files/files/bin/config_generate
+          ./scripts/feeds clean
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           sudo sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:99999:7:::/g' ./package/base-files/files/etc/shadow
 
-
       - name: Generate configuration file
         run: |
-          cd lede
+          cd openwrt
           rm -f ./.config*
           touch ./.config
           # 常用LuCI插件选择:
           cat >> .config <<EOF
           CONFIG_TARGET_x86=y
           CONFIG_TARGET_x86_generic=y
-          CONFIG_TARGET_x86_generic_Generic=y
+          CONFIG_TARGET_x86_generic_Generic=y          
           CONFIG_PACKAGE_luci-app-adbyby-plus=n
           CONFIG_PACKAGE_luci-app-vsftpd=n
           CONFIG_PACKAGE_luci-app-xlnetacc=n
@@ -70,8 +77,8 @@ jobs:
           CONFIG_PACKAGE_autosamba=n
           CONFIG_PACKAGE_luci-app-uugamebooster=n
           CONFIG_PACKAGE_ipv6helper=y
-          CONFIG_PACKAGE_luci-app-samba=y
-          CONFIG_PACKAGE_luci-app-automount=y
+          CONFIG_PACKAGE_luci-app-samba=n
+          CONFIG_PACKAGE_luci-app-automount=n
           CONFIG_PACKAGE_luci-app-sqm=n
           CONFIG_PACKAGE_luci-app-wsdd2=n
           CONFIG_PACKAGE_luci-app-airplay2=n
@@ -89,68 +96,116 @@ jobs:
           CONFIG_PACKAGE_luci-app-sfe=y
           CONFIG_PACKAGE_luci-app-flowoffload=n
           CONFIG_PACKAGE_luci-app-netdata=y
+          #CONFIG_PACKAGE_luci-app-passwall=y
+          #CONFIG_PACKAGE_luci-app-vssr=y
+          #CONFIG_PACKAGE_luci-theme-argon=y
+          CONFIG_PACKAGE_trojan-plus=n
+          CONFIG_PACKAGE_trojan-go=n
+          CONFIG_PACKAGE_trojan=n
+          CONFIG_PACKAGE_v2ray-plugin=n
+          CONFIG_PACKAGE_luci-app-onliner=n
+          CONFIG_PACKAGE_luci-app-nlbwmon=y
           EOF
           
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
-          
-      - name: Make download
+
+      - name: Download package
+        id: package
         run: |
-          cd lede
-          make download -j8
-          find dl -size -1024c -exec rm -f {} \;
+            cd openwrt
+            make defconfig
+            make download -j8
+            find dl -size -1024c -exec ls -l {} \;
+            find dl -size -1024c -exec rm -f {} \;
 
-      - name: Compile firmware
+      - name: Compile the firmware
+        id: compile
         run: |
-          cd lede
-          make -j$(nproc) || make -j1 V=s
-          echo "======================="
-          echo "Space usage:"
-          echo "======================="
-          df -h
-          echo "======================="
-          du -h --max-depth=1 ./ --exclude=build_dir --exclude=bin
-          du -h --max-depth=1 ./build_dir
-          du -h --max-depth=1 ./bin
-          grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
-          [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
-          echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
+            cd openwrt
+            echo -e "$(nproc) thread compile"
+            make -j$(nproc) || make -j1 || make -j1 V=s
+            echo "::set-output name=status::success"
+            grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
+            [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
+            echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
 
-      - name: Prepare artifact
+      - name: Check space usage
+        if: (!cancelled())
+        run: df -hT
+
+      - name: Upload bin directory
+        uses: actions/upload-artifact@main
+        if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
+        with:
+            name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+            path: openwrt/bin
+
+      - name: Organize files
+        id: organize
+        if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
         run: |
-          cd lede
-          mkdir -p ./artifact/firmware
-          mkdir -p ./artifact/package
-          mkdir -p ./artifact/buildinfo
-          rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/targets/ -type f) ./artifact/firmware/
-          cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
-          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+            cd openwrt/bin/targets/*/*
+            rm -rf packages
+            echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+            echo "::set-output name=status::success"
 
-      - name: Deliver buildinfo
-        uses: actions/upload-artifact@v2
+      - name: Upload firmware directory
+        uses: actions/upload-artifact@main
+        if: steps.organize.outputs.status == 'success' && !cancelled()
         with:
-          name: OpenWrt_buildinfo
-          path: ./lede/artifact/buildinfo/
+            name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+            path: ${{ env.FIRMWARE }}
 
-      - name: Deliver package
-        uses: actions/upload-artifact@v2
-        with:
-          name: OpenWrt_package
-          path: ./lede/artifact/package/
+      - name: Upload firmware to cowtransfer
+        id: cowtransfer
+        if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+        run: |
+            curl -fsSL git.io/file-transfer | sh
+            ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
+            echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
+            echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
 
-      - name: Deliver firmware
-        uses: actions/upload-artifact@v2
-        with:
-          name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-          path: ./lede/bin/targets/
-  
+      - name: Upload firmware to WeTransfer
+        id: wetransfer
+        if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
+        run: |
+            curl -fsSL git.io/file-transfer | sh
+            ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
+            echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
+            echo "::set-output name=url::$(cat wetransfer.log | grep https | cut -f3 -d" ")"
 
-      - name: Upload release asset
-        if: github.event == 'release'
-        uses: svenstaro/upload-release-action@v2
+      - name: Generate release tag
+        id: tag
+        if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+        run: |
+            echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
+            touch release.txt
+            [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
+            [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
+            echo "::set-output name=status::success"
+
+      - name: Upload firmware to release
+        uses: softprops/action-gh-release@v1
+        if: steps.tag.outputs.status == 'success' && !cancelled()
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          repo_token: ${{ secrets.YOURTOKEN }}
-          file: ./lede/artifact/firmware/*
-          tag: ${{ github.ref }}
-          file_glob: true
+            tag_name: ${{ steps.tag.outputs.release_tag }}
+            body_path: release.txt
+            files: ${{ env.FIRMWARE }}/*
+
+      - name: Delete workflow runs
+        uses: GitRML/delete-workflow-runs@main
+        with:
+            retain_days: 1
+            keep_minimum_runs: 3
+
+      - name: Remove old Releases
+        uses: dev-drprasad/delete-older-releases@v0.1.0
+        if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+        with:
+            keep_latest: 3
+            delete_tags: true
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
