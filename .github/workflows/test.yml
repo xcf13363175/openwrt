@@ -60,7 +60,7 @@ jobs:
           #git clone https://github.com/jerrykuku/lua-maxminddb
           #git clone https://github.com/jerrykuku/luci-app-vssr
           #git clone https://github.com/xiaorouji/openwrt-passwall
-          rm -rf luci-theme-argon  
+          #rm -rf luci-theme-argon  
           #git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
           #git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
           git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
@@ -105,7 +105,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-netdata=y
           #CONFIG_PACKAGE_luci-app-passwall=y
           #CONFIG_PACKAGE_luci-app-vssr=y
-          CONFIG_PACKAGE_luci-theme-argon=y
+          #CONFIG_PACKAGE_luci-theme-argon=y
           CONFIG_PACKAGE_trojan-plus=n
           CONFIG_PACKAGE_trojan-go=n
           CONFIG_PACKAGE_trojan=n
