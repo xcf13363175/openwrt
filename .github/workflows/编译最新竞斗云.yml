@@ -11,7 +11,7 @@ name: 编译最新竞斗云
 
 on:
   repository_dispatch:
-    types: [lean, RM2100]
+    types: [lean, p2w_r619ac]
   workflow_dispatch:
   schedule:
     - cron: 0 18 * * *
