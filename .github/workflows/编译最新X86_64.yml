@@ -8,13 +8,16 @@
 name: 编译最新X86_64
 
 on:
-  push:
-    tags:
-      - '*'
-  schedule:
-    - cron: 0 20 * * *
-  watch:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
+    watch:
     types: started
+
 env:
   TZ: Asia/Shanghai
 
