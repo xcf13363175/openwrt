@@ -97,7 +97,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-netdata=y
           #CONFIG_PACKAGE_luci-app-passwall=y
           #CONFIG_PACKAGE_luci-app-vssr=y
-          CONFIG_PACKAGE_luci-theme-argon=y
+          CONFIG_PACKAGE_luci-theme-argon=n
           CONFIG_PACKAGE_trojan-plus=n
           CONFIG_PACKAGE_trojan-go=n
           CONFIG_PACKAGE_trojan=n
