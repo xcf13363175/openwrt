@@ -9,7 +9,7 @@ name: 编译最新n270
 
 on:
   repository_dispatch:
-    types: [lean, n270]
+    types: [lean, x86_64]
   workflow_dispatch:
   schedule:
     - cron: 0 18 * * *
@@ -26,8 +26,8 @@ jobs:
 
       - name: Space cleanup
         env:
-         DEBIAN_FRONTEND: noninteractive
-         run: |
+          DEBIAN_FRONTEND: noninteractive
+        run: |
           docker rmi `docker images -q`
           sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
           sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* android*
