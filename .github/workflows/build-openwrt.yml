@@ -30,7 +30,7 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: true
   UPLOAD_WETRANSFER: true
-  UPLOAD_RELEASE: true
+  UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
 
 jobs:
@@ -93,52 +93,6 @@ jobs:
       id: package
       run: |
         cd openwrt
-          rm -f ./.config*
-          touch ./.config
-          # 常用LuCI插件选择:
-          cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-app-adbyby-plus=y
-          CONFIG_PACKAGE_luci-app-vsftpd=n
-          CONFIG_PACKAGE_luci-app-xlnetacc=n
-          CONFIG_PACKAGE_luci-app-accesscontrol=n
-          CONFIG_PACKAGE_luci-app-autoreboot=n
-          CONFIG_PACKAGE_luci-app-nlbwmon=n
-          CONFIG_PACKAGE_luci-app-v2ray-server=n
-          CONFIG_PACKAGE_luci-app-unblockmusic=n
-          CONFIG_PACKAGE_autosamba=n
-          CONFIG_PACKAGE_luci-app-uugamebooster=n
-          CONFIG_PACKAGE_ipv6helper=y
-          CONFIG_PACKAGE_luci-app-samba=n
-          CONFIG_PACKAGE_luci-app-automount=n
-          CONFIG_PACKAGE_luci-app-sqm=n
-          CONFIG_PACKAGE_luci-app-wsdd2=n
-          CONFIG_PACKAGE_luci-app-airplay2=n
-          CONFIG_PACKAGE_luci-app-music-remote-center=n
-          CONFIG_PACKAGE_luci-app-qbittorrent=n
-          CONFIG_PACKAGE_luci-app-webadmin=n
-          CONFIG_PACKAGE_luci-app-amule=n
-          CONFIG_PACKAGE_luci-app-openvpn-server=n
-          CONFIG_PACKAGE_luci-app-ipsec-vpnd=n
-          CONFIG_PACKAGE_luci-app-softethervpn=n
-          CONFIG_PACKAGE_luci-app-ttyd=y
-          CONFIG_PACKAGE_luci-app-jd-dailybonus=n
-          CONFIG_PACKAGE_luci-app-ddns=n
-          CONFIG_PACKAGE_luci-app-filetransfer=n
-          CONFIG_PACKAGE_luci-app-sfe=y
-          CONFIG_PACKAGE_luci-app-flowoffload=n
-          CONFIG_PACKAGE_luci-app-netdata=y
-          #CONFIG_PACKAGE_luci-app-passwall=y
-          #CONFIG_PACKAGE_luci-app-vssr=y
-          CONFIG_PACKAGE_luci-theme-argon=y
-          CONFIG_PACKAGE_trojan-plus=n
-          CONFIG_PACKAGE_trojan-go=n
-          CONFIG_PACKAGE_trojan=n
-          CONFIG_PACKAGE_v2ray-plugin=n
-          CONFIG_PACKAGE_luci-app-onliner=y
-          CONFIG_PACKAGE_luci-app-nlbwmon=y
-          EOF
-          
-          sed -i 's/^[ \t]*//g' ./.config
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
