@@ -53,11 +53,13 @@ cp -r {luci-app-zerotier,adbyby,automount,baidupcs-web,coremark,ddns-scripts_ali
 popd
 
 # Add Project OpenWrt's autocore
+pushd package/lean
 rm -rf autocore
 svn co https://github.com/project-openwrt/openwrt/branches/master/package/lean/autocore
 
 # Add luci-app-ssr-plus
 git clone --depth=1 https://github.com/fw876/helloworld
+rm -rf helloworld/luci-app-ssr-plus/po/zh_Hans
 popd
 
 # Clean Lean's code
@@ -66,6 +68,7 @@ rm -rf lede
 popd
 
 # Add luci-app-onliner. (need luci-app-nlbwmon)
+pushd package/lean
 git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
 
 
@@ -76,7 +79,7 @@ git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
 
 # Use immortalwrt's luci-app-netdata
 svn co https://github.com/immortalwrt/immortalwrt/trunk/package/ntlf9t/luci-app-netdata
-
+popd
 # Add netdata
 pushd feeds/packages/admin
 rm -rf netdata
