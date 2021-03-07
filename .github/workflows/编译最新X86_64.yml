@@ -98,7 +98,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-softethervpn=n
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-jd-dailybonus=n
-          CONFIG_PACKAGE_luci-app-ddns=n
+          CONFIG_PACKAGE_luci-app-ddns=y
           CONFIG_PACKAGE_luci-app-filetransfer=n
           CONFIG_PACKAGE_luci-app-sfe=y
           CONFIG_PACKAGE_luci-app-flowoffload=n
@@ -106,10 +106,6 @@ jobs:
           #CONFIG_PACKAGE_luci-app-passwall=y
           #CONFIG_PACKAGE_luci-app-vssr=y
           #CONFIG_PACKAGE_luci-theme-argon=y
-          CONFIG_PACKAGE_trojan-plus=n
-          CONFIG_PACKAGE_trojan-go=n
-          CONFIG_PACKAGE_trojan=n
-          CONFIG_PACKAGE_v2ray-plugin=n
           CONFIG_PACKAGE_luci-app-onliner=y
           CONFIG_PACKAGE_luci-app-nlbwmon=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
@@ -127,7 +123,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
           EOF
-          
+
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
 
