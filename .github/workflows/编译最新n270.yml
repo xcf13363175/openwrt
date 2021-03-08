@@ -55,6 +55,7 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           sudo sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:99999:7:::/g' ./package/base-files/files/etc/shadow
+          git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
 
       - name: Generate configuration file
         run: |
@@ -76,7 +77,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-unblockmusic=n
           CONFIG_PACKAGE_autosamba=n
           CONFIG_PACKAGE_luci-app-uugamebooster=n
-          CONFIG_PACKAGE_ipv6helper=y
+          CONFIG_PACKAGE_ipv6helper=n
           CONFIG_PACKAGE_luci-app-samba=n
           CONFIG_PACKAGE_luci-app-automount=n
           CONFIG_PACKAGE_luci-app-sqm=n
@@ -91,7 +92,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-softethervpn=n
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-jd-dailybonus=n
-          CONFIG_PACKAGE_luci-app-ddns=y
+          CONFIG_PACKAGE_luci-app-ddns=n
           CONFIG_PACKAGE_luci-app-filetransfer=n
           CONFIG_PACKAGE_luci-app-sfe=y
           CONFIG_PACKAGE_luci-app-flowoffload=n
