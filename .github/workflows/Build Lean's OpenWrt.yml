@@ -112,6 +112,11 @@ jobs:
     - name: Check space usage
       if: (!cancelled())
       run: df -hT
+    
+    - name: Compress Img Files
+      run: |
+          cd openwrt/bin/targets/x86/64
+          gzip *.img
 
     - name: Upload bin directory
       uses: actions/upload-artifact@main
