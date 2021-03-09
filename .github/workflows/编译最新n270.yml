@@ -53,7 +53,7 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           sudo sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:99999:7:::/g' ./package/base-files/files/etc/shadow
-          git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
+
 
     - name: Generate configuration file
       run: |
@@ -99,8 +99,8 @@ jobs:
           #CONFIG_PACKAGE_luci-app-vssr=y
           #CONFIG_PACKAGE_luci-theme-argon=y
           CONFIG_PACKAGE_v2ray-plugin=n
-          #CONFIG_PACKAGE_luci-app-onliner=y
-          #CONFIG_PACKAGE_luci-app-nlbwmon=y
+          #CONFIG_PACKAGE_luci-app-onliner=n
+          #CONFIG_PACKAGE_luci-app-nlbwmon=n
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=n
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy=n
