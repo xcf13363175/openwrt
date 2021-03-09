@@ -75,7 +75,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-unblockmusic=n
           CONFIG_PACKAGE_autosamba=n
           CONFIG_PACKAGE_luci-app-uugamebooster=n
-          CONFIG_PACKAGE_ipv6helper=n
+          CONFIG_PACKAGE_ipv6helper=y
           CONFIG_PACKAGE_luci-app-samba=n
           CONFIG_PACKAGE_luci-app-automount=n
           CONFIG_PACKAGE_luci-app-sqm=n
@@ -99,7 +99,7 @@ jobs:
           #CONFIG_PACKAGE_luci-app-vssr=y
           #CONFIG_PACKAGE_luci-theme-argon=y
           CONFIG_PACKAGE_v2ray-plugin=n
-          #CONFIG_PACKAGE_luci-app-onliner=n
+          #CONFIG_PACKAGE_luci-app-onliner=y
           #CONFIG_PACKAGE_luci-app-nlbwmon=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=n
