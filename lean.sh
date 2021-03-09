@@ -24,8 +24,8 @@ git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
 
 
 # Add luci-theme-argon
-git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
-git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
+#git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
+#git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
 
 
 # Use immortalwrt's luci-app-netdata
