@@ -102,7 +102,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-filetransfer=n
           CONFIG_PACKAGE_luci-app-sfe=y
           CONFIG_PACKAGE_luci-app-flowoffload=n
-          CONFIG_PACKAGE_luci-app-netdata=y
+          CONFIG_PACKAGE_luci-app-netdata=n
           #CONFIG_PACKAGE_luci-app-passwall=y
           #CONFIG_PACKAGE_luci-app-vssr=y
           #CONFIG_PACKAGE_luci-theme-argon=y
