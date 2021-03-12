@@ -56,6 +56,9 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           sudo sed -i 's/root::0:0:99999:7:::/root:$1$l6Tqa73w$Zoavr1irum3walH.ZOQAo1:18674:0:99999:7:::/g' ./package/base-files/files/etc/shadow
+          # 去除 luci-app-socat与socat冲突文件
+          sudo sed -i '/INSTALL_CONF/d' feeds/packages/net/socat/Makefile
+          sudo sed -i '/socat\.init/d' feeds/packages/net/socat/Makefile
           cd ./package/lean/
           #git clone https://github.com/jerrykuku/lua-maxminddb
           #git clone https://github.com/jerrykuku/luci-app-vssr
@@ -64,6 +67,8 @@ jobs:
           #git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
           #git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
           git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
+          # Add luci-app-socat 
+          sudo svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-socat
 
 
       - name: Generate configuration file
