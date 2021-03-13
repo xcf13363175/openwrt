@@ -116,7 +116,7 @@ jobs:
     - name: Compress Img Files
       run: |
           cd openwrt/bin/targets/x86/64
-          gzip *.img
+          #gzip *.img
 
     - name: Upload bin directory
       uses: actions/upload-artifact@main
