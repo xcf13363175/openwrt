@@ -69,7 +69,8 @@ jobs:
           cat >> .config <<EOF
           CONFIG_TARGET_x86=y
           CONFIG_TARGET_x86_generic=y
-          CONFIG_TARGET_x86_generic_Generic=y          
+          CONFIG_TARGET_x86_generic_Generic=y
+          CONFIG_TARGET_IMAGES_GZIP=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=n
           CONFIG_PACKAGE_luci-app-vsftpd=n
           CONFIG_PACKAGE_luci-app-xlnetacc=n
