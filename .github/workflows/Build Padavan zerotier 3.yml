@@ -15,9 +15,9 @@ on:
     types: started
 
 env:                      # 环境变量
-  MHZ: 1100               # CPU超频频率 必须为20的倍数。开启超频请修改124行超频选项
+  MHZ: 1000               # CPU超频频率 必须为20的倍数。开启超频请修改124行超频选项
   TNAME: RM2100           # 配置文件名  https://github.com/hanwckf/rt-n56u/tree/master/trunk/configs/templates
-  BUILD_VERSION: chongshengB  # hanwckf 或者 chongshengB
+  BUILD_VERSION: xumng123  # hanwckf 或者 chongshengB
 
 jobs:
   build:
@@ -153,7 +153,7 @@ jobs:
         # 以下插件为 chongshengB 版本专属插件，hanwckf 版不可用!!!
         # 如需使用这些插件，请修改24行 BUILD_VERSION 为 chongshengB
         #########################################################################################
-        if [ $BUILD_VERSION == "chongshengB" ]; then
+        if [ $BUILD_VERSION == "xumng123" ]; then
           echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> configs/templates/$TNAME.config      #simple-obfs混淆插件
           echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> configs/templates/$TNAME.config      #adbyby plus+
           echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> configs/templates/$TNAME.config     #阿里DDNS
