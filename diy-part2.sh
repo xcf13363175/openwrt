@@ -70,6 +70,7 @@ popd
 # Add luci-app-onliner. (need luci-app-nlbwmon)
 pushd package/lean
 git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
+svn co https://github.com/xiaorouji/openwrt-passwall/luci-app-passwall
 
 
 # Add luci-theme-argon
