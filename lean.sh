@@ -26,7 +26,7 @@ git clone --depth=1 https://github.com/fw876/helloworld
 
 # Add luci-app-socat 
 svn co https://github.com/Lienol/openwrt-package/trunk/luci-app-socat
-svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall
+#svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall
 # Add luci-theme-argon
 #git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
 #git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
