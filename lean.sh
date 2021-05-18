@@ -22,20 +22,21 @@ pushd package/lean
 git clone --depth=1 https://github.com/fw876/helloworld
 
 # Add luci-app-onliner. (need luci-app-nlbwmon)
-git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
+#git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
 
 # Add luci-app-socat 
 svn co https://github.com/Lienol/openwrt-package/trunk/luci-app-socat
+svn co https://github.com/xiaorouji/openwrt-passwall/luci-app-passwall
 # Add luci-theme-argon
 #git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
 #git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
 
 
 # Use immortalwrt's luci-app-netdata
-svn co https://github.com/immortalwrt/immortalwrt/trunk/package/ntlf9t/luci-app-netdata
+#svn co https://github.com/immortalwrt/immortalwrt/trunk/package/ntlf9t/luci-app-netdata
 popd
 # Add netdata
-pushd feeds/packages/admin
-rm -rf netdata
-svn co https://github.com/immortalwrt/packages/trunk/admin/netdata
-popd
+#pushd feeds/packages/admin
+#rm -rf netdata
+#svn co https://github.com/immortalwrt/packages/trunk/admin/netdata
+#popd
