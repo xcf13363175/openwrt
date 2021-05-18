@@ -66,7 +66,7 @@ jobs:
           #rm -rf luci-theme-argon  
           #git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
           #git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
-          git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
+          #git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
           # Add luci-app-socat 
           sudo svn export https://github.com/Lienol/openwrt-package/trunk/luci-app-socat
 
@@ -106,14 +106,14 @@ jobs:
           CONFIG_PACKAGE_luci-app-jd-dailybonus=n
           CONFIG_PACKAGE_luci-app-ddns=y
           CONFIG_PACKAGE_luci-app-filetransfer=n
-          CONFIG_PACKAGE_luci-app-sfe=n
-          CONFIG_PACKAGE_luci-app-flowoffload=y
+          CONFIG_PACKAGE_luci-app-sfe=y
+          CONFIG_PACKAGE_luci-app-flowoffload=n
           CONFIG_PACKAGE_luci-app-netdata=n
-          CONFIG_PACKAGE_luci-app-passwall=y
+          #CONFIG_PACKAGE_luci-app-passwall=y
           #CONFIG_PACKAGE_luci-app-vssr=y
           #CONFIG_PACKAGE_luci-theme-argon=y
-          CONFIG_PACKAGE_luci-app-onliner=y
-          CONFIG_PACKAGE_luci-app-nlbwmon=y
+          #CONFIG_PACKAGE_luci-app-onliner=y
+          #CONFIG_PACKAGE_luci-app-nlbwmon=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_socat=y
           CONFIG_PACKAGE_luci-app-socat=y
