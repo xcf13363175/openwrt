@@ -93,7 +93,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-amule=n
           CONFIG_PACKAGE_luci-app-openvpn-server=n
           CONFIG_PACKAGE_luci-app-ipsec-vpnd=n
-          CONFIG_PACKAGE_luci-app-softethervpn=n
+          CONFIG_PACKAGE_luci-app-softethervpn=y
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-jd-dailybonus=n
           CONFIG_PACKAGE_luci-app-ddns=y
