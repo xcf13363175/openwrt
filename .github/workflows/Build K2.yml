@@ -62,6 +62,7 @@ jobs:
           touch ./.config
           # 常用LuCI插件选择:
           cat >> .config <<EOF
+          CONFIG_TARGET_ramips=y
           CONFIG_TARGET_ramips_mt7620=y
           CONFIG_TARGET_ramips_mt7620_DEVICE_phicomm_psg1218a=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=y
