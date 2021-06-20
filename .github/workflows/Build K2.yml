@@ -66,7 +66,6 @@ jobs:
           CONFIG_TARGET_ramips_mt7620=y
           CONFIG_TARGET_ramips_mt7620_DEVICE_phicomm_psg1218a=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=y
-          CONFIG_PACKAGE_luci-app-adbyby-plus=y
           CONFIG_PACKAGE_luci-app-vsftpd=n
           CONFIG_PACKAGE_luci-app-xlnetacc=n
           CONFIG_PACKAGE_luci-app-accesscontrol=n
@@ -89,14 +88,14 @@ jobs:
           CONFIG_PACKAGE_luci-app-openvpn-server=n
           CONFIG_PACKAGE_luci-app-ipsec-vpnd=n
           CONFIG_PACKAGE_luci-app-softethervpn=n
-          CONFIG_PACKAGE_luci-app-ttyd=y
+          CONFIG_PACKAGE_luci-app-ttyd=n
           CONFIG_PACKAGE_luci-app-jd-dailybonus=n
           CONFIG_PACKAGE_luci-app-ddns=n
           CONFIG_PACKAGE_luci-app-filetransfer=n
           CONFIG_PACKAGE_luci-app-ssr-plus=n
           CONFIG_PACKAGE_xray-core=n
           CONFIG_PACKAGE_luci-app-flowoffload=n
-          CONFIG_PACKAGE_luci-app-sfe=y
+          CONFIG_PACKAGE_luci-app-sfe=n
           CONFIG_PACKAGE_luci-app-zerotier=y
           EOF
           
