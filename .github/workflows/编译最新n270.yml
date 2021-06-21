@@ -121,8 +121,8 @@ jobs:
           #CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=n
           #CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS=y
           #CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
-          #CONFIG_PACKAGE_socat=y
-          #CONFIG_PACKAGE_luci-app-socat=y
+          CONFIG_PACKAGE_socat=y
+          CONFIG_PACKAGE_luci-app-socat=y
           EOF
           
           sed -i 's/^[ \t]*//g' ./.config
