@@ -81,6 +81,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-unblockmusic=n
           CONFIG_PACKAGE_autosamba=n
           CONFIG_PACKAGE_luci-app-uugamebooster=n
+          CONFIG_IPV6=n
           CONFIG_PACKAGE_ipv6helper=n
           CONFIG_PACKAGE_luci-app-samba=n
           CONFIG_PACKAGE_luci-app-automount=n
