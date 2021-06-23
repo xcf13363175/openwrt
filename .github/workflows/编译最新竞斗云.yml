@@ -90,6 +90,10 @@ jobs:
           CONFIG_PACKAGE_luci-app-jd-dailybonus=n
           CONFIG_PACKAGE_luci-app-ddns=n
           CONFIG_PACKAGE_luci-app-filetransfer=n
+          CONFIG_PACKAGE_luci-app-ssr-plus=y
+          CONFIG_PACKAGE_luci-app-flowoffload=n
+          CONFIG_PACKAGE_luci-app-sfe=y
+          CONFIG_PACKAGE_luci-app-zerotier=y
           EOF
           
           sed -i 's/^[ \t]*//g' ./.config
