@@ -98,6 +98,9 @@ jobs:
           CONFIG_PACKAGE_luci-app-flowoffload=n
           CONFIG_PACKAGE_luci-app-sfe=n
           CONFIG_PACKAGE_luci-app-zerotier=y
+          CONFIG_PACKAGE_odhcpd-ipv6only=n
+          CONFIG_PACKAGE_odhcp6c=n
+          CONFIG_PACKAGE_ip6tables=n
           EOF
           
           sed -i 's/^[ \t]*//g' ./.config
