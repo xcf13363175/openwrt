@@ -7,7 +7,7 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 # 
 
-name: 编译最新K2
+name: 编译最新Redmi AX6
 
 on:
   repository_dispatch:
