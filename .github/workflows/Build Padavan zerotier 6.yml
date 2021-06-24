@@ -132,8 +132,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> configs/templates/$TNAME.config         #删除工具NANO
         echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> configs/templates/$TNAME.config         #删除工具HTOP
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> configs/templates/$TNAME.config        #删除工具LRZSZ
-        echo "CONFIG_FIRMWARE_INCLUDE_CURL=n" >> configs/templates/$TNAME.config         #删除工具CURL
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=n" >> configs/templates/$TNAME.config      #删除OPENSSH
+        echo "CONFIG_FIRMWARE_INCLUDE_CURL=y" >> configs/templates/$TNAME.config         #删除工具CURL
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=y" >> configs/templates/$TNAME.config      #删除OPENSSH
         echo "CONFIG_FIRMWARE_INCLUDE_SFTP=n" >> configs/templates/$TNAME.config         #删除SFTP
         echo "CONFIG_FIRMWARE_INCLUDE_TCPDUMP=n" >> configs/templates/$TNAME.config      #删除TCPDUMP
         echo "CONFIG_FIRMWARE_INCLUDE_EAP_PEAP=n" >> configs/templates/$TNAME.config     #删除EAP_PEAP
@@ -193,5 +193,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: Padavan_K2-5.0${{ env.FILE_DATE }}
+        name: Padavan_K2-6.0${{ env.FILE_DATE }}
         path: /opt/images
