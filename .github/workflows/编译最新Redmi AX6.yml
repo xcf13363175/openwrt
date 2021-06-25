@@ -65,8 +65,14 @@ jobs:
           CONFIG_TARGET_ipq807x=y
           CONFIG_TARGET_ipq807x_generic=y
           CONFIG_TARGET_ipq807x_generic_DEVICE_redmi_ax6=y
+          CONFIG_PACKAGE_luci-app-socat=y
+          CONFIG_PACKAGE_odhcpd-ipv6only=n
+          CONFIG_PACKAGE_odhcp6c=n
+          CONFIG_PACKAGE_ip6tables=n
+          CONFIG_IPV6=n
+          CONFIG_PACKAGE_ipv6helper=n
           EOF
-          
+
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
         
