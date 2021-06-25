@@ -71,6 +71,8 @@ jobs:
           CONFIG_PACKAGE_ip6tables=n
           CONFIG_IPV6=n
           CONFIG_PACKAGE_ipv6helper=n
+          CONFIG_PACKAGE_luci-app-sfe=n
+          CONFIG_PACKAGE_luci-app-zerotier=y
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
