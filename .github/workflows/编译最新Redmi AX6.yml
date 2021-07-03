@@ -111,6 +111,7 @@ jobs:
           CONFIG_PACKAGE_odhcp6c=n
           CONFIG_PACKAGE_ip6tables=n
           CONFIG_PACKAGE_luci-app-qbittorrent=n
+          CONFIG_PACKAGE_luci-app-cpufreq=y
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
