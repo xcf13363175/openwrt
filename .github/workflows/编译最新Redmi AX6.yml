@@ -103,7 +103,7 @@ jobs:
           CONFIG_PACKAGE_odhcpd-ipv6only=n
           CONFIG_PACKAGE_odhcp6c=n
           CONFIG_PACKAGE_ip6tables=n
-          CONFIG_PACKAGE_kmod-qca-nss-ecm-standard=y
+          CONFIG_PACKAGE_kmod-qca-nss-ecm-premium=y
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
