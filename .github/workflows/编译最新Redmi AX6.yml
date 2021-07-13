@@ -65,7 +65,7 @@ jobs:
           CONFIG_TARGET_ipq807x_generic=y
           CONFIG_TARGET_ipq807x_generic_DEVICE_redmi_ax6=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=y
-          CONFIG_IPV6=n
+          CONFIG_IPV6=y
           CONFIG_PACKAGE_luci-app-vsftpd=n
           CONFIG_PACKAGE_luci-app-xlnetacc=n
           CONFIG_PACKAGE_luci-app-accesscontrol=n
@@ -103,11 +103,11 @@ jobs:
           CONFIG_PACKAGE_odhcpd-ipv6only=n
           CONFIG_PACKAGE_odhcp6c=n
           CONFIG_PACKAGE_ip6tables=n
-          CONFIG_PACKAGE_kmod-qca-nss-ecm-64=n
-          CONFIG_PACKAGE_kmod-qca-nss-dp=n
-          CONFIG_PACKAGE_kmod-qca-nss-drv-64=n
-          CONFIG_PACKAGE_kmod-qca-nss-drv-pppoe-64=n
-          CONFIG_PACKAGE_kmod-qca-ssdk-nohnat=n
+          #CONFIG_PACKAGE_kmod-qca-nss-ecm-64=n
+          #CONFIG_PACKAGE_kmod-qca-nss-dp=n
+          #CONFIG_PACKAGE_kmod-qca-nss-drv-64=n
+          #CONFIG_PACKAGE_kmod-qca-nss-drv-pppoe-64=n
+          #CONFIG_PACKAGE_kmod-qca-ssdk-nohnat=n
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
